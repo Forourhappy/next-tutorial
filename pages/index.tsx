@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import Link from "next/link";
+import {DataType, getFeaturedEvents} from "@/dummy-data";
+import EventList from "@/components/events/EventList";
 
-export default function Home() {
-
+function HomePage() {
+    const featuredEvents: DataType[] = getFeaturedEvents();
     return (
         <>
             <Head>
@@ -12,11 +13,14 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
-                <ol>
-                    <li><Link href="/user">유저 리스트</Link></li>
-                    <li><Link href="/blog">블로그</Link></li>
-                </ol>
+                <ul>
+                    <EventList items={featuredEvents}/>
+                    {/*<li><Link href="/user">유저 리스트</Link></li>*/}
+                    {/*<li><Link href="/blog">블로그</Link></li>*/}
+                </ul>
             </main>
         </>
     )
 }
+
+export default HomePage
