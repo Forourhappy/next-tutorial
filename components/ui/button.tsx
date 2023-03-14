@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import classes from '@/styles/button.module.css'
+import classes from '@/components/ui/button.module.css'
 
 const Button = <T, >(props: T) => {
     return (

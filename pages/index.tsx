@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import {DataType, getFeaturedEvents} from "@/dummy-data";
 import EventList from "@/components/events/EventList";
+import {Html} from "next/document";
 
 function HomePage() {
     const featuredEvents: DataType[] = getFeaturedEvents();
@@ -12,13 +13,13 @@ function HomePage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <main>
+            <div>
                 <ul>
                     <EventList items={featuredEvents}/>
                     {/*<li><Link href="/user">유저 리스트</Link></li>*/}
                     {/*<li><Link href="/blog">블로그</Link></li>*/}
                 </ul>
-            </main>
+            </div>
         </>
     )
 }
