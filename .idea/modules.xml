@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../practice-next.iml" filepath="$PROJECT_DIR$/../practice-next.iml" />
+      <module fileurl="file://$PROJECT_DIR$/next-tutorial.iml" filepath="$PROJECT_DIR$/next-tutorial.iml" />
     </modules>
   </component>
 </project>

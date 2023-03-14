@@ -3,6 +3,8 @@ import {DataType} from "@/dummy-data";
 import classes from "./event-item.module.css";
 import Button from "@/components/ui/button";
 import DateIcon from "@/components/icons/date-icon";
+import AddressIcon from "@/components/icons/address-icon";
+import ArrowRightIcon from "@/components/icons/arrow-right-icon";
 
 
 const EventItem = (props: { eventProps: DataType }) => {
@@ -26,10 +28,14 @@ const EventItem = (props: { eventProps: DataType }) => {
                     <time>{humanReadableDate}</time>
                 </div>
                 <div className={classes.address}>
+                    <AddressIcon/>
                     <address>{formattedAddress}</address>
                 </div>
                 <div className={classes.actions}>
-                    <Button link={`/events/${id}`}>이벤트 이동</Button>
+                    <Button link={`/events/${id}`}>
+                        <span>이벤트 이동</span>
+                        <span className={classes.icon}><ArrowRightIcon/></span>
+                    </Button>
                 </div>
             </div>
         </li>
