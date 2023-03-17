@@ -1,12 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import classes from '@/components/ui/button.module.css'
-import {UrlObject} from "url";
-import {MouseEventHandler, ReactNode} from "react";
+import classes from '@/components/ui/button.module.css';
+import {MouseEventHandler, ReactNode} from 'react';
 
 type PropsType = {
   children?: ReactNode;
-  link?: UrlObject;
+  link?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 const Button = (props: PropsType) => {
@@ -22,7 +21,7 @@ const Button = (props: PropsType) => {
     <button className={classes.btn} onClick={props.onClick}>
       {props.children}
     </button>
-  )
+  );
 
 };
 
