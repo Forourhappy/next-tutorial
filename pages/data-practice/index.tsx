@@ -1,5 +1,5 @@
 import React from 'react';
-import {InferGetStaticPropsType} from 'next';
+import {GetStaticPropsResult, InferGetStaticPropsType} from 'next';
 import * as fs from 'fs/promises';
 import path from 'path';
 
@@ -30,17 +30,35 @@ export default HomePage;
 // Next는 기본적으로 모든 페이지를 사전 렌더링하지만, 처음에만 적용.
 // 이후에는 React처럼 CSR로 작동한다.
 // getStaticProps는 이 페이지가 계속 사전 렌더링 될 수 있도록 유지시켜준다.
-export const getStaticProps = async () => {
+export const getStaticProps = async (): Promise<GetStaticPropsResult<FetchData>> => {
+  // build한 후 npm start를 했을 시,  로그는 서버 터미널에서 생성.
+  // 즉, 이 페이지는 서버에서 생성됨.
   console.log('리렌더링 중...');
   const filePath = path.join(process.cwd(), 'data-practice', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath, {encoding: 'utf8'});
   const data: FetchData = JSON.parse(jsonData);
+
+  if (!data) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/no-data'
+      }
+    };
+  }
+
+  if (data.products.length === 0) {
+    return {
+      notFound: true
+    };
+  }
+
   return {
     props: {
       products: data.products
     },
     // 마지막으로 생성되고 revalidate 값만큼 지나면, 이 페이지로 들어오는 모든 요청에 대해 재생성.
     // 단위는 초
-    revalidate: 10
+    revalidate: 10,
   };
 };
