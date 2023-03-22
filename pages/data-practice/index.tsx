@@ -2,6 +2,7 @@ import React from 'react';
 import {GetStaticPropsResult, InferGetStaticPropsType} from 'next';
 import * as fs from 'fs/promises';
 import path from 'path';
+import Link from 'next/link';
 
 // JSON의 타입을 설정
 // JSON의 파일을 import해서 불러오는 방법도 있지만, 이를 위해서는 'resolveJsonModule' 옵션을 true로 바꿔야 함.
@@ -15,8 +16,11 @@ const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <ul>
       {products.map(
-        product => <li key={product.id}>{product.title}</li>
-      )}
+        product => (
+          <li key={product.id}>
+            <Link href={`/${product.id}`}>{product.title}</Link>
+          </li>
+        ))}
     </ul>
   );
 };
