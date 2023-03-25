@@ -3,6 +3,7 @@ import {GetStaticPropsResult, InferGetStaticPropsType} from 'next';
 import * as fs from 'fs/promises';
 import path from 'path';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 // JSON의 타입을 설정
 // JSON의 파일을 import해서 불러오는 방법도 있지만, 이를 위해서는 'resolveJsonModule' 옵션을 true로 바꿔야 함.
@@ -13,12 +14,13 @@ type FetchData = {
 
 const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const {products} = props;
+  const router = useRouter();
   return (
     <ul>
       {products.map(
         product => (
           <li key={product.id}>
-            <Link href={`/${product.id}`}>{product.title}</Link>
+            <Link href={`${router.pathname}/${product.id}`}>{product.title}</Link>
           </li>
         ))}
     </ul>
@@ -38,7 +40,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<FetchData>>
   // build한 후 npm start를 했을 시,  로그는 서버 터미널에서 생성.
   // 즉, 이 페이지는 서버에서 생성됨.
   console.log('리렌더링 중...');
-  const filePath = path.join(process.cwd(), 'data-practice', 'dummy-backend.json');
+  const filePath = path.join(process.cwd(), 'pages/data-practice', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath, {encoding: 'utf8'});
   const data: FetchData = JSON.parse(jsonData);
 

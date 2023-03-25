@@ -18,7 +18,7 @@ type StaticResultProp = {
 }
 
 const getData = async () => {
-  const filePath = path.join(process.cwd(), 'data-practice', 'dummy-backend.json');
+  const filePath = path.join(process.cwd(), 'pages/data-practice', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath, {encoding: 'utf8'});
   const data: FetchData = JSON.parse(jsonData);
 
