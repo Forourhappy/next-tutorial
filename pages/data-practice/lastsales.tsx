@@ -53,7 +53,6 @@ const LastSalesPage = () => {
   // }, []);
 
   if (!data) {
-    console.log('여기');
     return <p>로딩 중...</p>;
   }
 
@@ -61,8 +60,7 @@ const LastSalesPage = () => {
     return <p>로딩에 실패했습니다.</p>;
   }
 
-  if (!data || !sales) {
-    console.log('여기인가');
+  if (!data && !sales) {
     return <p>로딩 중...</p>;
   }
 
@@ -71,6 +69,25 @@ const LastSalesPage = () => {
       {sales?.map(sale => <li key={sale.id}>{sale.username} - {sale.volume}</li>)}
     </ul>
   );
+};
+
+export const getStaticProps = async () => {
+  return fetch('https://next-tutorial-fab2a-default-rtdb.firebaseio.com//sales.json')
+    .then(res => res.json())
+    .then((data: SalesType) => {
+      const salesList: SalesListType[] = Object.entries(data).map(([key, value]) => ({
+        id: key,
+        username: value.username,
+        volume: value.volume
+      }));
+
+      return {
+        props: {
+          sales: salesList
+        },
+        revalidate: 10
+      };
+    });
 };
 
 export default LastSalesPage;
