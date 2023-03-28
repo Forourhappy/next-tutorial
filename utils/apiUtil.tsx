@@ -17,3 +17,9 @@ export const getFeaturedEvent = () => {
   const allEvents = getAllEvents();
   return allEvents.filter(event => event.isFeatured);
 };
+
+export const getEventById = (id: string | undefined) => {
+  const allEvents = getAllEvents();
+  return allEvents.find(event => event.id === id);
+};
+
