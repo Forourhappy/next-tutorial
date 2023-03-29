@@ -1,25 +1,23 @@
 import {EventType} from '@/types/events/EventTypes';
 
-export const getAllEvents = () => {
-  let events: EventType[] = [];
-  fetch('https://next-tutorial-fab2a-default-rtdb.firebaseio.com/events.json')
-    .then(res => res.json())
-    .then((res: JSON) => {
-      events = Object.entries(res).map(([key, val]) => ({
+export const getAllEvents = async () => {
+    let events: EventType[] = [];
+    const data = await fetch('https://next-tutorial-fab2a-default-rtdb.firebaseio.com/events.json');
+    const jsonData = data.json();
+    events = Object.entries(jsonData).map(([key, val]) => ({
         id: key,
         ...val
-      }));
-    });
-  return events;
+    }));
+    return events;
 };
 
-export const getFeaturedEvent = () => {
-  const allEvents = getAllEvents();
-  return allEvents.filter(event => event.isFeatured);
+export const getFeaturedEvent = async () => {
+    const allEvents = await getAllEvents();
+    return allEvents.filter(event => event.isFeatured);
 };
 
-export const getEventById = (id: string | undefined) => {
-  const allEvents = getAllEvents();
-  return allEvents.find(event => event.id === id);
+export const getEventById = async (id: string | undefined) => {
+    const allEvents = await getAllEvents();
+    return allEvents.find(event => event.id === id);
 };
 
