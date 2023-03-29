@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import {DataType, getFeaturedEvents} from '@/dummy-data';
 import EventList from '@/components/events/EventList';
+import {GetStaticPropsResult, InferGetStaticPropsType} from 'next';
+import {EventType} from '@/types/events/EventTypes';
+import {getFeaturedEvents} from '@/utils/apiUtil';
 
-function HomePage() {
-  const featuredEvents: DataType[] = getFeaturedEvents();
+function HomePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+
   return (
     <>
       <Head>
@@ -13,7 +15,7 @@ function HomePage() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <div>
-        <EventList items={featuredEvents}/>
+        <EventList items={props.events}/>
         {/*<li><Link href="/user">유저 리스트</Link></li>*/}
         {/*<li><Link href="/blog">블로그</Link></li>*/}
       </div>
@@ -21,4 +23,14 @@ function HomePage() {
   );
 }
 
+export const getStaticProps = async (): Promise<GetStaticPropsResult<{ events: EventType[] }>> => {
+  const featuredEvents = await getFeaturedEvents();
+
+  return {
+    props: {
+      events: featuredEvents
+    },
+    revalidate: 1800
+  };
+};
 export default HomePage;
