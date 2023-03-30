@@ -1,6 +1,6 @@
 export interface EventDate {
-  year: string;
-  month: string;
+  year: number;
+  month: number;
 }
 
 export interface EventType {
@@ -12,3 +12,4 @@ export interface EventType {
   image: string;
   isFeatured: boolean;
 }
+

@@ -1,13 +1,13 @@
 import React from 'react';
-import {DataType} from '@/dummy-data';
 import classes from './event-item.module.css';
 import Button from '@/components/ui/button';
 import DateIcon from '@/components/icons/date-icon';
 import AddressIcon from '@/components/icons/address-icon';
 import ArrowRightIcon from '@/components/icons/arrow-right-icon';
+import {EventType} from '@/types/events/EventTypes';
 
 
-const EventItem = (props: { eventProps: DataType }) => {
+const EventItem = (props: { eventProps: EventType }) => {
   const {title, image, date, location, id} = props.eventProps;
 
   const humanReadableDate = new Date(date).toLocaleDateString('kr-KR', {
