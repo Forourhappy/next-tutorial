@@ -1,17 +1,16 @@
 import React from 'react';
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 
 const Source = () => {
-    const router = useRouter();
-    console.log(router.query.source)
-    return (
-        <div>
-            <h1>안녕하세요!</h1>
-            <p>
+  const router = useRouter();
+  return (
+    <div>
+      <h1>안녕하세요!</h1>
+      <p>
 
-            </p>
-        </div>
-    );
+      </p>
+    </div>
+  );
 };
 
 export default Source;

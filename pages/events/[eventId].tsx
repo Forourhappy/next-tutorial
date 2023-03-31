@@ -15,6 +15,7 @@ const EventDetailPage = (props: InferGetStaticPropsType<typeof getStaticProps>) 
   //   return <p>이벤트를 찾을 수 없습니다.</p>;
   // }
 
+
   if (!event) {
     return (
       <div className="center">
@@ -22,15 +23,20 @@ const EventDetailPage = (props: InferGetStaticPropsType<typeof getStaticProps>) 
       </div>
     );
   }
+
+  const pageHeadData = (
+    <Head>
+      {/*이벤트 제목을 동적으로 로딩 가능*/}
+      <title>{event.title}</title>
+      <meta name="description"
+            content={event.description}
+      />
+    </Head>
+  );
+
   return (
     <>
-      <Head>
-        {/*이벤트 제목을 동적으로 로딩 가능*/}
-        <head>{event.title}</head>
-        <meta name="description"
-              content={event.description}
-        />
-      </Head>
+      {pageHeadData}
       <EventSummary title={event.title}/>
       <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title}/>
       <EventContent>

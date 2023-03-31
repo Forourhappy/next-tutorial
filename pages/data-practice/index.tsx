@@ -39,7 +39,6 @@ export default HomePage;
 export const getStaticProps = async (): Promise<GetStaticPropsResult<FetchData>> => {
   // build한 후 npm start를 했을 시,  로그는 서버 터미널에서 생성.
   // 즉, 이 페이지는 서버에서 생성됨.
-  console.log('리렌더링 중...');
   const filePath = path.join(process.cwd(), 'pages/data-practice', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath, {encoding: 'utf8'});
   const data: FetchData = JSON.parse(jsonData);

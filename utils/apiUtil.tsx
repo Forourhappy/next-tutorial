@@ -1,10 +1,10 @@
 import {EventType} from '@/types/events/EventTypes';
 
 export const getAllEvents = async () => {
-  let events: EventType[] = [];
-  const data = await fetch('https://next-tutorial-fab2a-default-rtdb.firebaseio.com/events.json');
-  const jsonData = data.json();
-  events = Object.entries(jsonData).map(([key, val]) => ({
+  let events: EventType[];
+  const response = await fetch('https://next-tutorial-fab2a-default-rtdb.firebaseio.com/events.json');
+  const data: object = await response.json();
+  events = Object.entries(data).map(([key, val]) => ({
     id: key,
     ...val
   }));
