@@ -1,5 +1,4 @@
 import React from 'react';
-import {useRouter} from 'next/router';
 import EventList from '@/components/events/EventList';
 import ResultsTitle from '@/components/events/ResultsTitle';
 import Button from '@/components/ui/button';
@@ -7,20 +6,46 @@ import ErrorAlert from '@/components/ui/ErrorAlert';
 import {GetServerSidePropsContext, GetServerSidePropsResult, InferGetServerSidePropsType} from 'next';
 import {getFilteredEvents} from '@/utils/apiUtil';
 import {EventDate, EventType} from '@/types/events/EventTypes';
+import Head from 'next/head';
 
 const FilteredEventsPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter();
 
+  // ClientSide render 과정은 이미 익숙하다고 판단해서 스킵하기로 함.
+
+  // const [loadedEvents, setLoadedEvents] = useState();
+  // const router = useRouter();
+  //
   // const filterData = router.query.slug;
+  //
+  // const {data, error} = useSWR('https://next-tutorial-fab2a-default-rtdb.firebaseio.com/sales.json');
+  //
+  // useEffect(() => {
+  //   if (data) {
+  //     const salesList = Object.entries(data).map(([key, value]) => ({
+  //       id: key,
+  //       username: value.username,
+  //       volume: value.volume
+  //     }));
+  //   }
+  //   setLoadedEvents(events);
+  // }, [data]);
 
-  // if (!filterData) {
+
+  // if (!loadedEvents || !filterData) {
   //   return <p className="center">로딩 중입니다.</p>;
   // }
   //
   // const filteredYear = filterData[0];
   // const filteredMonth = filterData[1];
+  //
+  //
   // const numYear = +filteredYear;
   // const numMonth = +filteredMonth;
+
+  // const filteredEvents = loadedEvents.filter((event) => {
+  //   const eventDate = new Date(event.date);
+  //   return eventDate.getFullYear() === numYear && eventDate.getMonth() === numMonth - 1;
+  // });
 
   if (props.hasError) {
     return (
@@ -54,6 +79,12 @@ const FilteredEventsPage = (props: InferGetServerSidePropsType<typeof getServerS
 
   return (
     <>
+      <Head>
+        <head>Filtered Events</head>
+        <meta name="description"
+              content={`All events for ${props.date.year}/${props.date.month}`}
+        />
+      </Head>
       <ResultsTitle date={date}/>
       <EventList items={filteredEvents}/>
     </>

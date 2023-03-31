@@ -6,6 +6,7 @@ import EventContent from '@/components/event-detail/EventContent';
 import {GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult, InferGetStaticPropsType} from 'next';
 import {getEventById, getFeaturedEvents} from '@/utils/apiUtil';
 import {EventType} from '@/types/events/EventTypes';
+import Head from 'next/head';
 
 const EventDetailPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const event = props.selectedEvent;
@@ -23,6 +24,13 @@ const EventDetailPage = (props: InferGetStaticPropsType<typeof getStaticProps>) 
   }
   return (
     <>
+      <Head>
+        {/*이벤트 제목을 동적으로 로딩 가능*/}
+        <head>{event.title}</head>
+        <meta name="description"
+              content={event.description}
+        />
+      </Head>
       <EventSummary title={event.title}/>
       <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title}/>
       <EventContent>
