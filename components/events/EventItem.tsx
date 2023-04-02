@@ -5,6 +5,7 @@ import DateIcon from '@/components/icons/date-icon';
 import AddressIcon from '@/components/icons/address-icon';
 import ArrowRightIcon from '@/components/icons/arrow-right-icon';
 import {EventType} from '@/types/events/EventTypes';
+import Image from 'next/image';
 
 
 const EventItem = (props: { eventProps: EventType }) => {
@@ -20,7 +21,10 @@ const EventItem = (props: { eventProps: EventType }) => {
 
   return (
     <li className={classes.item}>
-      <img src={image} alt=""></img>
+      {/*Next에 최적화된 img 표현 태그*/}
+      {/*이미지의 용량, 인코딩 방식 최적화*/}
+      {/*컴포넌트가 보일 때에만 이미지를 request*/}
+      <Image src={image} alt={title} width={240} height={160}/>
       <div className={classes.content}>
         <div><h2>{title}</h2></div>
         <div className={classes.date}>
