@@ -8,11 +8,11 @@ export type FeedbackData = {
     text: string
 }
 
-const buildFeedbackPath = () => {
+export const buildFeedbackPath = () => {
     return path.join(process.cwd(), 'data', 'feedback.json');
 }
 
-const extractFeedback = (filePath: string) => {
+export const extractFeedback = (filePath: string) => {
     const fileData = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileData);
     return data;
