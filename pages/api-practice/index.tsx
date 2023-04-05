@@ -1,7 +1,8 @@
 import React, {FormEvent, useRef, useState} from 'react';
+import {FeedbackData} from "@/pages/api/api-practice/feedback";
 
 const MainPage = () => {
-    const [feedbackItems, setFeedbackItems] = useState();
+    const [feedbackItems, setFeedbackItems] = useState<FeedbackData[]>();
 
     const emailInputRef = useRef<HTMLInputElement>(null);
     const feedbackInputRef = useRef<HTMLTextAreaElement>(null);
@@ -47,9 +48,9 @@ const MainPage = () => {
                 <button onClick={submitFormHandler}>제출</button>
             </form>
             <hr/>
-            <button>불러오기</button>
+            <button onClick={loadFeedbackHandler}>불러오기</button>
             <ul>
-                {feedbackItems.map(item => <li key={item.id}>{item.text}</li>)}
+                {feedbackItems && feedbackItems.map(item => <li key={item.id}>{item.text}</li>)}
             </ul>
         </div>
     );
