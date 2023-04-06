@@ -1,14 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {buildFeedbackPath, extractFeedback, FeedbackData} from "@/pages/api/api-practice/feedback";
 import {GetStaticProps, InferGetStaticPropsType} from "next";
 
 const FeedbackPage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const [feedbackData, setFeedbackData] = useState<FeedbackData>();
+    const loadFeedbackHandler = (id: string) => {
+        fetch(`/api/api-practice/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setFeedbackData(data.feedback);
+            })
+    }
+
     return (
-        <ul>
-            {props.feedbackItems.map((item: FeedbackData) => (
-                <li key={item.id}>{item.text}</li>
-            ))}
-        </ul>
+        <>
+            {feedbackData && <p>{feedbackData.email}</p>}
+            <ul>
+                {props.feedbackItems.map((item: FeedbackData) => (
+                    <li key={item.id}>
+                        {item.text}
+                        <button onClick={() => loadFeedbackHandler(item.id)}>상세 보기</button>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 };
 
