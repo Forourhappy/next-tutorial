@@ -1,5 +1,5 @@
 import {PropsWithChildren} from "react";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/practiceComponents/layout/MainHeader";
 
 const Layout = (props: PropsWithChildren) => {
     return (
