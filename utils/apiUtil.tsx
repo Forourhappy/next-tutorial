@@ -1,4 +1,4 @@
-import {EventType} from '@/types/events/EventTypes';
+import {EventType} from '@/types/events/eventTypes';
 
 export const getAllEvents = async () => {
   let events: EventType[];
